@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}"
+      xmlns:th="http://www.thymeleaf.org">
+
+
+<body>
+<section layout:fragment="content">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">View Course</h5>
+
+            <!-- Add Course Form -->
+            <form class="row g-3">
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" th:value="${course.id}" class="form-control" id="id" name="id"
+                               placeholder="Course Id" readonly>
+                        <label for="code">Course Id</label>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="form-floating">
+                        <input type="text" th:value="${course.name}" readonly class="form-control" id="name"
+                               name="name"
+                               placeholder="Course Name">
+                        <label for="name">Course Name</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" th:value="${course.code}" readonly class="form-control" id="code"
+                               name="code"
+                               placeholder="Course Code">
+                        <label for="code">Course Code</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="number" th:value="${course.credits}" readonly class="form-control" id="credits"
+                               name="credits"
+                               placeholder="Course Credits">
+                        <label for="credits">Course Credits</label>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" th:value="${course.lecturer.firstName}" readonly class="form-control"
+                               id="lecturer_id"
+                               name="lecturer_id"
+                               placeholder="Course Lecturer">
+                        <label for="code">Course Lecturer</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" th:value="${course.department.name}" readonly class="form-control"
+                               id="department_id"
+                               name="department_id"
+                               placeholder="Course Department">
+                        <label for="code">Course Department</label>
+                    </div>
+                </div>
+
+
+                <div class="text-center">
+
+                    <a href="/course/viewAll" class="btn btn-warning">Back</a>
+                </div>
+            </form><!-- Add Course Form -->
+
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

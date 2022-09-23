@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout">
+
+<body>
+<div layout:fragment="content">
+
+    <div class="card">
+
+        <div class="card-body">
+            <h5 class="card-title"> User Details </h5>
+
+
+            <form class="row g-3">
+
+                <div class="col-md-2">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="userId" name="id"
+                               placeholder="User Id" readonly th:value="${user.id}">
+                        <label for="userId">User Id</label>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="firstName" name="firstName"
+                               placeholder="First Name" readonly th:value="${user.firstName}">
+                        <label for="firstName">First Name</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="lastName" name="lastName"
+                               placeholder="Last Name" readonly th:value="${user.lastName}">
+                        <label for="lastName">Last Name</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="username" name="username"
+                               placeholder="Username" readonly th:value="${user.username}">
+                        <label for="username">Username</label>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-body">
+            <h5 class="card-title"> Assigned User Roles</h5>
+            <table class="table datatable table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Role Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Action</th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="userRole:${userRoles}">
+                    <th scope="row" th:text="${userRole.id}"></th>
+                    <td th:text="${userRole.name}"></td>
+                    <td th:text="${userRole.description}"></td>
+                    <td>
+                        <a th:href="@{'/role/unassign/'+${user.id}+'/' +${userRole.id}}"
+                           class="btn btn-danger"><i class="bi bi-x"></i>Unassign</a>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+
+        <div class="card-body">
+            <h5 class="card-title"> Unassigned User Roles</h5>
+
+            <table class="table datatable table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Role Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Action</th>
+
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="userNotRole:${userNotRoles}">
+                    <th scope="row" th:text="${userNotRole.id}"></th>
+                    <td th:text="${userNotRole.name}"></td>
+                    <td th:text="${userNotRole.description}"></td>
+                    <td>
+                        <a th:href="@{'/role/assign/'+${user.id}+'/' +${userNotRole.id}}"
+                           class="btn btn-success"><i class="bi bi-check"></i>Assign</a>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

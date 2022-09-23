@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<section layout:fragment="content">
+
+    <div style="text-align:center; font-size:15px; color:green;">
+        <span th:text="${message}"></span>
+    </div>
+
+    <div class="card">
+        <span><br> </span>
+        <div class="card-body">
+            <a href="/student/add" class="btn btn-primary ">Add Student</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">View Students</h5>
+
+            <!-- Table with stripped rows -->
+            <table class="table datatable table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Address</th>
+
+                    <th scope="col">Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="student : ${students}">
+                    <th scope="row" th:text="${student.id}"></th>
+                    <td th:text="${student.firstName}"></td>
+                    <td th:text="${student.lastName}"></td>
+                    <td th:text="${student.phone}"></td>
+                    <td th:text="${student.emailId}"></td>
+                    <td th:text="${student.address}"></td>
+
+                    <td>
+                        <a th:href="@{'/student/view/'+${student.id}}" type="button" class="btn btn-primary"><i
+                                class="bi bi-eye"></i></a>
+
+                        <a th:href="@{'/student/edit/'+${student.id}}" type="button" class="btn btn-success"><i
+                                class="bi bi-pen"></i></a>
+                        <a
+                                onclick="return confirm('Are you sure you want to delete this record?')"
+                                th:href="@{'/student/delete/'+${student.id}}" type="button"
+                                class="btn btn-danger"><i
+                                class="bi bi-x"></i></a>
+
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+            <!-- End Table with stripped rows -->
+
+        </div>
+    </div>
+</section>
+</body>
+</html>

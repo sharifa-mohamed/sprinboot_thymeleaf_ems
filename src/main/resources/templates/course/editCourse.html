@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}"
+      xmlns:th="http://www.thymeleaf.org">
+
+
+<body>
+<section layout:fragment="content">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Edit Course</h5>
+
+            <!-- Add Course Form -->
+            <form class="row g-3" th:action="@{'/course/update/' +${course.id}}" method="put" th:object="${course}">
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" th:field="*{id}" class="form-control" id="id"
+                               placeholder="Course Id" readonly>
+                        <label for="code">Course Id</label>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-floating">
+                        <input type="text" th:field="*{name}" class="form-control" id="name"
+                               placeholder="Course Name" required>
+                        <label for="name">Course Name</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" th:field="*{code}" class="form-control" id="code"
+                               placeholder="Course Code" required>
+                        <label for="code">Course Code</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="number" th:field="*{credits}" class="form-control" id="credits"
+                               min="10" max="100" step="10"
+                               placeholder="Course Credits" required>
+                        <label for="credits">Course Credits</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <select class="form-control form-select" id="lecturer_id" th:field="*{lecturer}">
+
+                            <option th:each="lecturer2 : ${lecturers}"
+                                    th:value="${lecturer2.id}"
+                                    th:selected="${lecturer2.id}== *{lecturer.id} ? True : False"
+                                    th:text="${lecturer2.firstName}"
+                            ></option>
+                        </select>
+                        <label for="lecturer_id">Lecturer</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <select class="form-control form-select" id="department_id" th:field="*{department}" required>
+
+                            <option th:each="department1 : ${departments}"
+                                    th:value="${department1.id}"
+                                    th:selected="${department1.id} == *{department.id} ? True : False"
+                                    th:text="${department1.name}"
+                            ></option>
+                        </select>
+                        <label for="department_id">Department</label>
+                    </div>
+                </div>
+
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Update</button>
+                    <a href="/course/viewAll" class="btn btn-warning">Back</a>
+                </div>
+            </form><!-- Add Course Form -->
+
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

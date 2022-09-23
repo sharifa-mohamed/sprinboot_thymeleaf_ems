@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}"
+      xmlns:th="http://www.thymeleaf.org">
+
+
+<body>
+<section layout:fragment="content">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Edit Lecturer</h5>
+
+            <!-- Add Lecturer Form -->
+            <form class="row g-3" th:action="@{'/lecturer/update/' +${lecturer.id}}" method="put"
+                  th:object="${lecturer}">
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" th:field="*{title}" class="form-control" id="title"
+                               placeholder="Lecturer Title">
+                        <label for="title">Lecturer Title</label>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" th:field="*{firstName}" class="form-control" id="firstName"
+
+                               placeholder="Lecturer First Name">
+                        <label for="firstName">Lecturer First Name</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" th:field="*{lastName}" class="form-control" id="lastName"
+
+                               placeholder="Lecturer Last Name">
+                        <label for="lastName">Lecturer Last Name</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="tel" th:field="*{phone}" class="form-control" id="phone"
+                               placeholder="Lecturer Phone">
+                        <label for="phone">Lecturer Phone</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="email" th:field="*{email}" class="form-control" id="email"
+
+                               placeholder="Lecturer Email">
+                        <label for="email">Lecturer Email</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <select class="form-control form-select" id="department_id" th:field="*{department}">
+
+                            <option th:each="department2 : ${departments}"
+                                    th:value="${department2.id}"
+                                    th:selected="${department2.id}== *{department.id} ? True : False"
+                                    th:text="${department2.name}"
+                            ></option>
+                        </select>
+                        <label for="department_id">Department</label>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <select class="form-control form-select" id="qualification_id" th:field="*{qualification}">
+
+                            <option th:each="qualification2 : ${qualifications}"
+                                    th:value="${qualification2.id}"
+                                    th:selected="${qualification2.id}== *{qualification.id} ? True : False"
+                                    th:text="${qualification2.name}"
+                            ></option>
+                        </select>
+                        <label for="qualification_id">Qualification</label>
+                    </div>
+                </div>
+
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Update</button>
+                    <a href="/lecturer/viewAll" class="btn btn-warning">Back</a>
+                </div>
+            </form><!-- Add Lecturer Form -->
+
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

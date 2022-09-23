@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}"
+      xmlns:th="http://www.thymeleaf.org">
+
+
+<body>
+<section layout:fragment="content">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Edit Student</h5>
+
+            <!-- Add Student Form -->
+            <form class="row g-3" th:action="@{'/student/update/' +${student.id}}" method="put">
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" th:field="${student.firstName}" class="form-control" id="firstName"
+
+                               placeholder="Student First Name" required>
+                        <label for="firstName">Student First Name</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" th:field="${student.lastName}" class="form-control" id="lastName"
+
+                               placeholder="Student Last Name" required>
+                        <label for="lastName">Student Last Name</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="tel" th:field="${student.phone}" class="form-control" id="phone"
+                               placeholder="Student Phone" required>
+                        <label for="phone">Student Phone</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="email" th:field="${student.emailId}" class="form-control" id="email"
+
+                               placeholder="Student Email" required>
+                        <label for="email">Student Email</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="date" class="form-control" id="dob" th:field="${student.dob}"
+                               placeholder="Student DoB" required>
+                        <label for="dob">Student DoB</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="date" class="form-control" id="registerDate" th:field="${student.regDate}"
+                               placeholder="Student Register Date" required>
+                        <label for="dob">Student Register Date</label>
+                    </div>
+                </div>
+
+
+                <div class="col-12">
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Student Address" th:field="${student.address}"
+                                  id="address"
+                                  style="height: 60px;" required></textarea>
+                        <label for="address">Student Address</label>
+                    </div>
+                </div>
+
+
+                <h5 class="card-title  mb-0 pb-0">Guardian Details</h5>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="guardianName" th:field="${student.guardian.name}"
+                               placeholder="Guardian Name" required>
+                        <label for="guardianName">Guardian Name</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input list="guardianRels" class="form-control" id="guardianRel"
+                               th:field="${student.guardian.relationshipToStudent}"
+                               placeholder="Guardian Relationship" required>
+                        <label for="guardianRel">Guardian Relationship</label>
+                    </div>
+                </div>
+
+                <datalist id="guardianRels">
+                    <option value="parent"/>
+                    <option value="relative"/>
+                    <option value="other"/>
+                </datalist>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="tel" class="form-control" id="guardianPhone" th:field="${student.guardian.phone}"
+                               placeholder="Guardian Phone" required>
+                        <label for="phone">Guardian Phone</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="guardianEmail"
+                               th:field="${student.guardian.email}"
+                               placeholder="Guardian Email" required>
+                        <label for="email">Guardian Email</label>
+                    </div>
+                </div>
+                <h5 class="card-title mb-0 pb-0">Registered Course(s)</h5>
+
+                <div class="col-12">
+                    <div class="form">
+                        <label for="course_id">Choose one or more Courses</label>
+                        <select size="5" class="form-control form-select" th:field="${student.courses}" multiple
+                                id="course_id">
+
+                            <option th:each="course : ${courses}"
+                                    th:value="${course.id}"
+                                    th:text="${course.name}"
+                            ></option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Update</button>
+                    <a href="/student/viewAll" class="btn btn-warning">Back</a>
+                </div>
+            </form><!-- Add Student Form -->
+
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

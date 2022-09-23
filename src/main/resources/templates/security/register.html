@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="/assets/img/favicon.png">
+
+    <title>Register New User</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/assets/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/assets/css/elegant-icons-style.css" rel="stylesheet"/>
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome.css" rel="stylesheet"/>
+    <!-- Custom styles -->
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="/assets/css/style-responsive.css" rel="stylesheet"/>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="/assets/js/html5shiv.js"></script>
+    <script src="/assets/js/respond.min.js"></script>
+    <![endif]-->
+
+
+</head>
+
+<body class="login-img3-body">
+
+<div class="container">
+
+    <form class="login-form" th:action="@{/user/add}" method="post" th:object="${user}">
+        <div class="login-wrap">
+            <p class="login-img"><i class="bi bi-lock"></i></p>
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="bi bi-person-fill"></i></span>
+                <input type="text" class="form-control" placeholder="Firstname" autofocus th:field="*{firstName}"
+                       required>
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="bi bi-person-fill"></i></span>
+                <input type="text" class="form-control" placeholder="Lastname" autofocus th:field="*{lastName}"
+                       required>
+            </div>
+
+            <div style="text-align:center; font-size:15px; color:red;" id="usernameError">
+                <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+            </div>
+
+            <div class="input-group">
+
+                <span class="input-group-addon"><i class="bi bi-person-fill"></i></span>
+                <input type="text" class="form-control" placeholder="Username" th:field="*{username}" autofocus
+                       required onkeydown=" document.getElementById('usernameError').style.display='none';">
+
+            </div>
+
+            <div style="text-align:center; font-size:15px; color:red;" id="passwordError">
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </div>
+
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="bi bi-key-fill"></i></span>
+                <input type="password" class="form-control" placeholder="Password" id="password" th:field="*{password}"
+                       required onkeydown=" document.getElementById('passwordError').style.display='none';">
+            </div>
+
+            <div style="text-align:center; font-size:15px; color:red;" id="confirmPasswordError">
+                <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></span>
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="bi bi-key-fill"></i></span>
+                <input type="password" class="form-control" placeholder="Confirm Password" id="confirmPassword"
+                       th:field="*{confirmPassword}"
+                       required onkeydown=" document.getElementById('confirmPasswordError').style.display='none';">
+            </div>
+
+            <label class="checkbox">
+                <span><a th:href="@{/login}"> Login Page</a></span>
+                <span class="pull-right"> <a th:href="@{/forgot-password}"> Forgot Password?</a></span>
+            </label>
+            <button class="btn btn-primary btn-lg btn-block btn-logreg" type="submit">Register</button>
+        </div>
+    </form>
+
+</div>
+
+
+<!-- javascripts -->
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+
+<script src="/assets/js/register.js"></script>
+
+</body>
+
+</html>

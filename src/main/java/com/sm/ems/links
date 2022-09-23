@@ -1,0 +1,6 @@
+Swagger
+ UI: http://localhost:9002/swagger-ui.html
+
+For Json: http://localhost:9002/v3/api-docs
+
+For yaml: http://localhost:9002/api-docs.yaml

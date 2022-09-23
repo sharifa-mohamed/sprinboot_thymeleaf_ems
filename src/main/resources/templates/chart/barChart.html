@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+
+
+<body>
+<section layout:fragment="content">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title" th:text="${pageTitle}"></h4>
+
+            <form th:if="${withSelect == 'true'}" method="get" th:action="@{'/chart/' + ${chartName}}">
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <select class="form-control form-select" id="department_id" name="objectSelected"
+                                onchange="this.form.submit()" required>
+
+                            <option th:each="d : ${objects}"
+                                    th:value="${d.id}"
+                                    th:selected="${d.id}== ${objectSelected} ? True : False"
+                                    th:text="${d.name}"
+                            ></option>
+                        </select>
+                        <label for="department_id" th:text="${chartName}"></label>
+                    </div>
+                </div>
+            </form>
+
+
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body d-inline">
+
+                        <!-- Bar Chart -->
+                        <div class="row">
+                            <div class="col-lg-6 d-inline">
+                                <h6 class="card-title" th:text="${chartTitle1}"></h6>
+                                <div class="d-inline" id="barChart1"></div>
+                            </div>
+
+                            <div class="col-lg-6 d-inline-block">
+                                <h6 class="card-title" th:text="${chartTitle2}"></h6>
+                                <div class="d-inline-block" id="barChart2"></div>
+                            </div>
+                        </div>
+
+                        <th:block layout:fragment="script">
+
+                            <script th:inline="javascript">
+
+   document.addEventListener("DOMContentLoaded", () => {
+                    drawBarChart("#barChart1",[[${chartData_x1}]], [[${chartData_y1}]],[[${x_title1}]], [[${y_title1}]]);
+  drawBarChart("#barChart2",[[${chartData_x2}]], [[${chartData_y2}]],[[${x_title2}]], [[${y_title2}]]);
+
+                });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </script>
+                            <script th:src="@{/assets/js/chartjs-custom.js}"></script>
+                        </th:block>
+                        <!-- End Bar Chart -->
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!--            <div class="col-lg-6">-->
+<!--                <div class="card">-->
+<!--                    <div class="card-body">-->
+
+<!--                        <a th:href="@{/report/pdf/users}">Export to PDF</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="col-lg-6">-->
+<!--                <h5>iframe</h5>-->
+<!--                <iframe src="/report/pdf/users"-->
+<!--                        width="800"-->
+<!--                        height="500">-->
+<!--                </iframe>-->
+
+<!--                <embed width="900px" height="500px" name="plugin" src="/report/pdf/users" type="application/pdf"/>-->
+
+<!--            </div>-->
+
+
+</body>
+</html>

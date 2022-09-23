@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}"
+>
+
+
+<body>
+<section layout:fragment="content">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">View Lecturer</h5>
+
+            <!-- Add Lecturer Form -->
+            <form class="row g-3" th:object="${lecturer}">
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" th:field="*{title}" class="form-control" id="title"
+                               placeholder="Lecturer Title" readonly>
+                        <label for="title">Lecturer Title</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" readonly class="form-control" id="firstName"
+                               placeholder="Lecturer First Name" th:field="*{firstName}">
+                        <label for="firstName">Lecturer First Name</label>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" readonly class="form-control" id="lastName"
+                               placeholder="Lecturer Last Name" th:field="*{lastName}">
+                        <label for="lastName">Lecturer Last Name</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="tel" readonly class="form-control" id="phone"
+                               placeholder="Lecturer Phone" th:field="*{phone}">
+                        <label for="phone">Lecturer Phone</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="email" readonly class="form-control" id="email"
+                               placeholder="Lecturer Email" th:field="*{email}">
+                        <label for="email">Lecturer Email</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+
+                        <input type="text" readonly class="form-control" id="department_id"
+                               th:field="*{department.name}">
+                        <label for="department_id">Department</label>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" readonly class="form-control" id="qualification_id"
+                               th:field="*{qualification.name}">
+                        <label for="qualification_id">Qualification</label>
+                    </div>
+                </div>
+
+
+                <div class="text-center">
+
+                    <a href="/lecturer/viewAll" class="btn btn-warning">Back</a>
+                </div>
+            </form><!-- Add Lecturer Form -->
+
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

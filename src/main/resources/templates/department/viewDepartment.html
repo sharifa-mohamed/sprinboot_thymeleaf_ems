@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}"
+      xmlns:th="http://www.thymeleaf.org">
+
+
+<body>
+<section layout:fragment="content">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">View Department</h5>
+
+            <!-- Add Department Form -->
+            <form class="row g-3">
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" th:value="${department.id}" class="form-control" id="id" name="id"
+                               placeholder="Department Id" readonly>
+                        <label for="code">Department Id</label>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="form-floating">
+                        <input type="text" th:value="${department.name}" readonly class="form-control" id="name"
+                               name="name"
+                               placeholder="Department Name">
+                        <label for="name">Department Name</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" th:value="${department.code}" readonly class="form-control" id="code"
+                               name="code"
+                               placeholder="Department Code">
+                        <label for="code">Department Code</label>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-floating">
+                        <textarea class="form-control" th:text="${department.address}" readonly
+                                  placeholder="Department Address"
+                                  name="address" id="address"
+                                  style="height: 100px;"></textarea>
+                        <label for="address">Department Address</label>
+                    </div>
+                </div>
+
+
+            </form><!-- Add Department Form -->
+
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">View Courses of
+                <div class="h5 d-inline" th:text="${department.name}"></div>
+                Department
+            </h5>
+
+            <!-- Table with stripped rows -->
+            <table class="table datatable table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Credits</th>
+                    <th scope="col">Lecturer</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="course : ${department.courses}">
+                    <th scope="row" th:text="${course.id}"></th>
+                    <td th:text="${course.code}"></td>
+                    <td th:text="${course.name}"></td>
+                    <td th:text="${course.credits}"></td>
+                    <td th:text="${course.lecturer.firstName}"></td>
+
+
+                </tr>
+
+                </tbody>
+            </table>
+            <!-- End Table with stripped rows -->
+
+        </div>
+    </div>
+    <div class="text-center">
+
+        <a href="/department/viewAll" class="btn btn-warning">Back</a>
+    </div>
+</section>
+
+</body>
+</html>

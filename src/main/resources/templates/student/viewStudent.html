@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}"
+>
+
+
+<body>
+<section layout:fragment="content">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">View Student</h5>
+
+            <!-- Add Student Form -->
+            <form class="row g-3">
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" readonly class="form-control" id="firstName" name="firstName"
+                               placeholder="Student First Name" th:value="${student.firstName}">
+                        <label for="firstName">Student First Name</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" readonly class="form-control" id="lastName" name="lastName"
+                               placeholder="Student Last Name" th:value="${student.lastName}">
+                        <label for="lastName">Student Last Name</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="tel" readonly class="form-control" id="phone" name="phone"
+                               placeholder="Student Phone" th:value="${student.phone}">
+                        <label for="phone">Student Phone</label>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="email" readonly th:value="${student.emailId}" class="form-control" id="email"
+
+                               placeholder="Student Email">
+                        <label for="email">Student Email</label>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="date" class="form-control" readonly id="dob" th:field="${student.dob}"
+                               placeholder="Student DoB">
+                        <label for="dob">Student DoB</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="date" class="form-control" readonly id="registerDate"
+                               th:field="${student.regDate}"
+                               placeholder="Student Register Date">
+                        <label for="dob">Student Register Date</label>
+                    </div>
+                </div>
+
+
+                <div class="col-12">
+                    <div class="form-floating">
+                        <textarea class="form-control" readonly placeholder="Student Address"
+                                  th:field="${student.address}"
+                                  id="address"
+                                  style="height: 60px;"></textarea>
+                        <label for="address">Student Address</label>
+                    </div>
+                </div>
+
+
+                <h5 class="card-title  mb-0 pb-0">Guardian Details</h5>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" readonly id="guardianName"
+                               th:field="${student.guardian.name}"
+                               placeholder="Guardian Name">
+                        <label for="guardianName">Guardian Name</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="tel" class="form-control" readonly id="guardianRel"
+                               th:field="${student.guardian.relationshipToStudent}"
+                               placeholder="Guardian Relationship">
+                        <label for="guardianRel">Guardian Relationship</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="tel" class="form-control" id="guardianPhone" readonly
+                               th:field="${student.guardian.phone}"
+                               placeholder="Guardian Phone">
+                        <label for="phone">Guardian Phone</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="guardianEmail" readonly
+                               th:field="${student.guardian.email}"
+                               placeholder="Guardian Email">
+                        <label for="email">Guardian Email</label>
+                    </div>
+                </div>
+
+            </form><!-- Add Student Form -->
+
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">View Courses of Student
+                <div class="h5 d-inline" th:text="${student.firstName}"></div>
+
+            </h5>
+
+            <!-- Table with stripped rows -->
+            <table class="table datatable table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Credits</th>
+                    <th scope="col">Lecturer</th>
+                    <th scope="col">Department</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="course : ${courses}">
+                    <th scope="row" th:text="${course.id}"></th>
+                    <td th:text="${course.code}"></td>
+                    <td th:text="${course.name}"></td>
+                    <td th:text="${course.credits}"></td>
+                    <td th:text="${course.lecturer.firstName}"></td>
+                    <td th:text="${course.department.name}"></td>
+
+                </tr>
+
+                </tbody>
+            </table>
+            <!-- End Table with stripped rows -->
+
+        </div>
+    </div>
+
+    <div class="text-center">
+
+        <a href="/student/viewAll" class="btn btn-warning">Back</a>
+    </div>
+</section>
+
+</body>
+</html>

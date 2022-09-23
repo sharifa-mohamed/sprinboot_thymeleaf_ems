@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<section layout:fragment="content">
+    <div class="card">
+        <span><br> </span>
+        <div class="card-body">
+            <a href="/department/add" class="btn btn-primary ">Add Department</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">View Departments</h5>
+
+            <!-- Table with stripped rows -->
+            <table class="table datatable table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="department : ${departments}">
+                    <th scope="row" th:text="${department.id}"></th>
+                    <td th:text="${department.code}"></td>
+                    <td th:text="${department.name}"></td>
+                    <td th:text="${department.address}"></td>
+                    <td>
+                        <a th:href="@{'/department/view/'+${department.id}}" type="button" class="btn btn-primary"><i
+                                class="bi bi-eye"></i></a>
+
+                        <a th:href="@{'/department/edit/'+${department.id}}" type="button" class="btn btn-success"><i
+                                class="bi bi-pen"></i></a>
+                        <a
+                                onclick="return confirm('Are you sure you want to delete this record?')"
+                                th:href="@{'/department/delete/'+${department.id}}" type="button"
+                                class="btn btn-danger"><i
+                                class="bi bi-x"></i></a>
+
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+            <!-- End Table with stripped rows -->
+
+        </div>
+    </div>
+</section>
+</body>
+</html>

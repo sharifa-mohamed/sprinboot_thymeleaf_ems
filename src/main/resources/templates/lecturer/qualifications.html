@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<section layout:fragment="content">
+
+    <div style="text-align:center; font-size:15px; color:green;">
+        <span th:text="${message}"></span>
+    </div>
+
+    <div class="card">
+
+        <div class="card-body">
+            <h5 class="card-title">Add / Update Qualifications</h5>
+
+            <form class="row g-3" action="/qualification/add" method="post">
+
+                <div class="col-md-3">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="qualificationId" name="id"
+                               placeholder="Qualification Id" readonly>
+                        <label for="qualificationId">Qualification Id</label>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="qualificationName" name="name"
+                               placeholder="Qualification" required>
+                        <label for="qualificationName">Qualification</label>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="reset" class="btn btn-warning">Clear</button>
+                    </div>
+                </div>
+
+            </form>
+
+
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Available Qualifications</h5>
+
+            <!-- Table with stripped rows -->
+            <table class="table datatable table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Qualification</th>
+
+                    <th scope="col">Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="qualification : ${qualifications}">
+                    <th scope="row" th:text="${qualification.id}"></th>
+                    <td th:text="${qualification.name}"></td>
+                    <td>
+                        <a id="updateQualification" type="button"
+                           class="btn btn-success" th:href="@{'/qualification/'+${qualification.id}}"><i
+                                class="bi bi-pen"></i></a>
+                        <!--                        <a-->
+                        <!--                                onclick="return confirm('Are you sure you want to delete this record?')"-->
+                        <!--                                th:href="@{'/role/delete/'+${role.id}}" type="button"-->
+                        <!--                                class="btn btn-danger"><i-->
+                        <!--                                class="bi bi-x"></i></a>-->
+
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+            <!-- End Table with stripped rows -->
+
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        $('document').ready(function () {
+               $('.table #updateQualification').on('click', function (event) {
+                event.preventDefault();
+                var href = $(this).attr('href');
+                $.get(href, function (qualification, status) {
+                    $('#qualificationId').val(qualification.id);
+                    $('#qualificationName').val(qualification.name);
+
+                });
+        });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</section>
+</body>
+</html>

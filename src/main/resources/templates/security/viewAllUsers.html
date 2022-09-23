@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<section layout:fragment="content">
+
+    <div style="text-align:center; font-size:15px; color:green;">
+        <span th:text="${message}"></span>
+    </div>
+
+    <div class="card">
+        <span><br> </span>
+        <div class="card-body">
+            <a href="/user/addUnRegistered" class="btn btn-secondary" style="pointer-events: none">Add User</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">View Registered Users</h5>
+
+            <!-- Table with stripped rows -->
+            <table class="table datatable table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user:${users}">
+                    <th scope="row" th:text="${user.id}"></th>
+                    <td th:text="${user.firstName}"></td>
+                    <td th:text="${user.lastName}"></td>
+                    <td th:text="${user.username}"></td>
+
+                    <td>
+                        <a th:href="@{'/user/update/'+${user.id}}" type="button" class="btn btn-success"><i
+                                class="bi bi-pen"></i> Manage Roles</a>
+                        <a
+                                onclick="return confirm('Are you sure you want to delete?')"
+                                th:href="@{'/user/delete/'+${user.id}}" type="button"
+                                class="btn btn-danger"><i
+                                class="bi bi-x"></i></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- End Table with stripped rows -->
+
+        </div>
+    </div>
+</section>
+</body>
+</html>

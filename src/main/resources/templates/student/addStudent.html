@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+
+
+<body>
+<section layout:fragment="content">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title mb-0">Add Student</h5>
+
+            <!-- Add Student Form -->
+            <form class="row g-3" action="/student/add" method="post" th:object="${student}">
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="firstName" th:field="*{firstName}"
+                               placeholder="Student First Name" required>
+                        <label for="firstName">Student First Name</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="lastName" th:field="*{lastName}"
+                               placeholder="Student Last Name" required>
+                        <label for="lastName">Student Last Name</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6" style="text-align:center; font-size:15px; color:red;" id="phoneError">
+                    <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+                </div>
+
+                <div class="col-md-6" style="text-align:center; font-size:15px; color:red;" id="emailIdError">
+                    <span th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="tel" class="form-control" id="phone" th:field="*{phone}"
+                               placeholder="Student Phone" required>
+                        <label for="phone">Student Phone</label>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="email" th:field="*{emailId}"
+                               placeholder="Student Email" required>
+                        <label for="email">Student Email</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6" style="text-align:center; font-size:15px; color:red;" id="dobError">
+                    <span th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}"></span>
+                </div>
+                <div class="col-md-6" style="text-align:center; font-size:15px; color:red;" id="regDateError">
+                    <span th:if="${#fields.hasErrors('regDate')}" th:errors="*{regDate}"></span>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="date" class="form-control" id="dob" th:field="*{dob}"
+                               placeholder="Student DoB" required max="2010-01-01">
+                        <label for="dob">Student DoB</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="date" class="form-control" id="registerDate" th:field="*{regDate}"
+                               placeholder="Student Register Date" required>
+                        <label for="dob">Student Register Date</label>
+                    </div>
+                </div>
+
+                <script>
+                document.getElementById('registerDate').value = new Date().toISOString().substring(0, 10);
+
+
+
+
+
+
+                </script>
+                <div class="col-md-12">
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Student Address" th:field="*{address}" id="address"
+                                  style="height: 60px;" required></textarea>
+                        <label for="address">Student Address</label>
+                    </div>
+                </div>
+
+
+                <h5 class="card-title  mb-0 pb-0">Guardian Details</h5>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="guardianName" th:field="*{guardian.name}"
+                               placeholder="Guardian Name" required>
+                        <label for="guardianName">Guardian Name</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input list="guardianRels" class="form-control" id="guardianRel"
+                               th:field="*{guardian.relationshipToStudent}"
+                               placeholder="Guardian Relationship" required>
+                        <label for="guardianRel">Guardian Relationship</label>
+                    </div>
+                </div>
+
+                <datalist id="guardianRels">
+                    <option value="parent"/>
+                    <option value="relative"/>
+                    <option value="other"/>
+                </datalist>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="tel" class="form-control" id="guardianPhone" th:field="*{guardian.phone}"
+                               placeholder="Guardian Phone" required>
+                        <label for="phone">Guardian Phone</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="guardianEmail" th:field="*{guardian.email}"
+                               placeholder="Guardian Email" required>
+                        <label for="email">Guardian Email</label>
+                    </div>
+                </div>
+
+                <h5 class="card-title mb-0 pb-0">Registered Course(s)</h5>
+                <div class="col-md-12">
+                    <div class="form">
+                        <label for="course_id">Choose one or more Courses</label>
+                        <select size="5" class="form-control form-select" th:field="*{courses}" multiple
+                                id="course_id">
+
+                            <option th:each="courses : ${courses}"
+                                    th:value="${courses.id}"
+                                    th:text="${courses.name}"
+                            ></option>
+                        </select>
+
+                    </div>
+                </div>
+
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <a href="/student/viewAll" class="btn btn-warning">Back</a>
+                </div>
+            </form><!-- Add Student Form -->
+
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+
+
+<body>
+<section layout:fragment="content">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Add Department</h5>
+
+            <!-- Add Department Form -->
+            <form class="row g-3" action="/department/add" method="post">
+                <div class="col-md-12">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Department Name"
+                               required>
+                        <label for="name">Department Name</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="code" name="code" placeholder="Department Code"
+                               required>
+                        <label for="code">Department Code</label>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Department Address" name="address" id="address"
+                                  required
+                                  style="height: 100px;"></textarea>
+                        <label for="address">Department Address</label>
+                    </div>
+                </div>
+
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <a href="/department/viewAll" class="btn btn-warning">Back</a>
+                </div>
+            </form><!-- Add Department Form -->
+
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

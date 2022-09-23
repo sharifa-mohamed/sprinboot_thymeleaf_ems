@@ -1,0 +1,63 @@
+# java -jar spring-rest-1.0.0.jar --spring.profiles.active=qa
+server:
+  port: 9002
+
+springdoc:
+  paths-to-match: /**/api/**/
+
+spring:
+  profiles:
+    active: dev
+  security:
+    user:
+      username: "user"
+      password: "pw"
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: Asia/Kolkata
+
+#enable actuator endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env,beans"
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://localhost:3306/emsdevdb2?serverTimezone=UTC
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+---
+spring:
+  config:
+    activate:
+      on-profile: qa
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://localhost:3306/emsqadb?serverTimezone=UTC
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: 'true'
+---
+
